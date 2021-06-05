@@ -1,0 +1,207 @@
+<template>
+	<div class="page">
+		<div class="navbar navbar-page">
+			<div class="navbar-inner sliding">
+				<div class="left">
+					<a href="#" class="link back nav-back">
+						<i class="f7-icons">arrow_left</i>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="page-content">
+			<div class="single-post">
+				<div class="header">
+					{{#if data_2}}
+					<img src="{{myUrlToImage}}" alt="">
+					{{else}}
+					{{/if}}
+				</div>
+				<div class="wrap-content">
+					{{#if data_2}}
+					<h4>{{myTitle}}</h4>
+					{{else}}
+					{{/if}}
+					{{#if data_2}}
+					<p class="date">{{myPublishedAt}}</p>
+					{{else}}
+					{{/if}}
+					<div class="behaviour">
+						<ul>
+							<li><a href=""><i class="f7-icons">calendar</i></a></li>
+							<li><a href="#" data-popup="#share" class="popup-open"><i class="f7-icons">share</i></a></li>
+						</ul>
+					</div>
+					<div id="share" class="popup single-post-share">
+						{{#if data_2}}
+						<div class="row">
+							<div class="col-33">
+								<div class="content">
+									<a class="link external" href="https://www.facebook.com/sharer/sharer.php?u={{myUrl}}" target="_system"><i class="f7-icons">logo_facebook</i></a>
+								</div>
+							</div>
+							<div class="col-33">
+								<div class="content">
+									<a class="link external" href="https://wa.me?text={{myUrl}}" target="_system"><i class="f7-icons" style="background: green;">phone_circle_fill</i></a>
+								</div>
+							</div>
+							<div class="col-33">
+								<div class="content">
+									<a class="link external" href="https://telegram.me/share/url?url={{myUrl}}" target="_system"><i class="f7-icons">location_fill</i></a>
+								</div>
+							</div>
+						</div>
+						{{else}}
+						{{/if}}
+						<div class="row">
+							<div class="col">
+								<div class="content" align="center">
+									<p>
+										<a class="link popup-close" href="#">Tutup Jendela</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="desc">
+						{{#if data_2}}
+						<p>{{myDescription}}</p>
+						{{else}}
+						{{/if}}
+						{{#if data_2}}
+						<p>{{myContent}} <a class="link external" href="{{myUrl}}" target="_system">Baca Selengkapnya</a></p>
+						{{else}}
+						{{/if}}
+						<div class="see-too">
+							<h6>Sumber:</h6>
+							{{#if data_2}}
+							<a class="link external" href="{{myUrl}}" target="_system">{{myUrl}}</a>
+							{{else}}
+							{{/if}}
+						</div>
+					</div>
+					<a href="/">
+						<div class="author">
+							<img src="static/image/avatar.png" alt="">
+							<div class="title">
+								{{#if data_2}}
+								<h5>{{myAuthor}}</h5>
+								{{else}}
+								{{/if}}
+								{{#if data_2}}
+								<span>{{mySource}}</span>
+								{{else}}
+								{{/if}}
+							</div>
+						</div>
+					</a>
+					<div class="related-post">
+						<div class="wrap-title">
+							<h3>Berita Terbaru</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="home-category">
+				<div data-grab-cursor="false" data-space-between="10" data-slides-per-view="auto" class="swiper-container swiper-init demo-swiper demo-swiper-auto swiper-container-horizontal">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="content">
+								<img src="static/image/k1.jpg" alt="">
+								<div class="text">
+									<a href="/topics-detail/business/">
+										<h5>Bisnis</h5>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="content">
+								<img src="static/image/k2.jpg" alt="">
+								<div class="text">
+									<a href="/topics-detail/sports/">
+										<h5>Olahraga</h5>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="content">
+								<img src="static/image/k3.jpg" alt="">
+								<div class="text">
+									<a href="/topics-detail/entertainment/">
+										<h5>Hiburan</h5>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="content">
+								<img src="static/image/k4.jpg" alt="">
+								<div class="text">
+									<a href="/topics-detail/technology/">
+										<h5>Teknologi</h5>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="content">
+								<img src="static/image/k5.jpg" alt="">
+								<div class="text">
+									<a href="/topics-detail/health/">
+										<h5>Kesehatan</h5>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+<script>
+	export default {
+		mounted() {
+			var $this = this;
+			var app = this.$app;
+			var $$ = this.$$;
+			var self = this;
+		},
+		on: {
+			pageInit: function () {
+				var self = this;
+				var $this = this;
+				var app = this.$app;
+				var $$ = this.$$;
+				var dataJSON = new Array();
+				app.request.get('https://newsapi.org/v2/top-headlines', {country: 'id', category: 'sports', pageSize: 3, apiKey: myApiKey}, (response) => {
+					dataJSON = JSON.parse(response);
+					var item = dataJSON.articles;
+					var author = localStorage.getItem('author').split("'").join("");
+					var content = localStorage.getItem('content').split("'").join("");
+					var description = localStorage.getItem('description').split("'").join("");
+					var publishedAt = localStorage.getItem('publishedAt').split("'").join("");
+					var title = localStorage.getItem('title').split("'").join("");
+					var url = localStorage.getItem('url').split("'").join("");
+					var urlToImage = localStorage.getItem('urlToImage').split("'").join("");
+					var source = localStorage.getItem('source').split("'").join("");
+					var resContent = content.substring(0, 190);
+					console.log(dataJSON);
+					self.$setState({
+						data_2: item,
+						myAuthor: author,
+						myContent: resContent,
+						myDescription: description,
+						myPublishedAt: publishedAt,
+						myTitle: title,
+						myUrl: url,
+						myUrlToImage: urlToImage,
+						mySource: source
+					});
+				});
+			},
+		},
+	}
+</script>

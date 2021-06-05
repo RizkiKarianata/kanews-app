@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap: content:">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+	<meta name="theme-color" content="#007aff">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="msapplication-tap-highlight" content="no">
+	<title>KNews</title>
+	<% if (process.env.TARGET === 'web') { %>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+	<link rel="apple-touch-icon" href="static/icons/apple-touch-icon.png">
+	<link rel="icon" href="static/icons/favicon.png">
+	<% } %>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+	<link rel="stylesheet" href="static/css/framework7.min.css">
+	<link rel="stylesheet" href="static/css/framework7-icons.css">
+	<link rel="alternate stylesheet" type="text/css" href="static/css/style-red.css" title="style-red" />
+	<link rel="alternate stylesheet" type="text/css" href="static/css/style-cyan.css" title="style-cyan" />
+	<link rel="alternate stylesheet" type="text/css" href="static/css/style-green.css" title="style-green" />
+	<link rel="alternate stylesheet" type="text/css" href="static/css/style-orange.css" title="style-orange" />
+	<link rel="alternate stylesheet" type="text/css" href="static/css/style-dark-blue.css" title="style-dark-blue" />
+	<link rel="alternate stylesheet" type="text/css" href="static/css/style-dark-red.css" title="style-dark-red" />
+	<link rel="alternate stylesheet" type="text/css" href="static/css/style-dark-cyan.css" title="style-dark-cyan" />
+	<link rel="alternate stylesheet" type="text/css" href="static/css/style-dark-green.css" title="style-dark-green" />
+	<link rel="alternate stylesheet" type="text/css" href="static/css/style-dark-orange.css" title="style-dark-orange" />
+	<link rel="stylesheet" type="text/css" href="static/css/demo.css"/>
+	<link rel="stylesheet" type="text/css" href="static/css/style.css" title="default" />
+</head>
+<body>
+	<div id="app"></div>
+	<% if (process.env.TARGET === 'cordova') { %>
+	<script src="cordova.js"></script>
+	<% } %>
+	<script src="static/js/styleswitcher.js"></script>
+	<script>
+		const myApiKey = "9ba56971964a4a7ca214ed313963795c";
+	</script>
+</body>
+</html>

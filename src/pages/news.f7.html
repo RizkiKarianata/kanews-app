@@ -1,0 +1,108 @@
+<template>
+	<div class="page">
+		<div class="navbar navbar-page">
+			<div class="navbar-inner sliding">
+				<div class="left">
+					<a href="#" class="link back nav-back">
+						<i class="f7-icons">arrow_left</i>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="page-content">
+			<div class="post-full-width segments" style="margin-top: 50px;">
+				<div class="container">
+					{{#each data_1}}
+					<div class="content">
+						{{#if this.urlToImage}}
+						<img src="{{this.urlToImage}}" alt="" style="height: 225px;" referrerpolicy="no-referrer">
+						{{else}}
+						<img src="static/image/post4.jpg" alt="" style="height: 225px;">
+						{{/if}}
+						<div class="text">
+							<span>{{this.source.name}}</span>
+							<a class="single-news" href="/single-news/" @click="singleNews" data-author="'{{this.author}}'" data-content="'{{this.content}}'" data-description="'{{this.description}}'" data-publishedat="'{{this.publishedAt}}'" data-title="'{{this.title}}'" data-url="'{{this.url}}'" data-urltoimage="'{{this.urlToImage}}'" data-source="'{{this.source.name}}'"><h5>{{this.title}}</h5></a>
+						</div>
+					</div>
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+<script>
+	export default {
+		mounted() {
+			var $this = this;
+			var app = this.$app;
+			var $$ = this.$$;
+			var self = this;
+		},
+		methods: {
+			singleNews: function(e) {
+				var $this = this;
+				var app = this.$app;
+				var $$ = this.$$;
+				var self = this;
+				localStorage.setItem('author', $$(e.path[1]).data("author"));
+				localStorage.setItem('content', $$(e.path[1]).data("content"));
+				localStorage.setItem('description', $$(e.path[1]).data("description"));
+				localStorage.setItem('publishedAt', $$(e.path[1]).data("publishedat"));
+				localStorage.setItem('title', $$(e.path[1]).data("title"));
+				localStorage.setItem('url', $$(e.path[1]).data("url"));
+				localStorage.setItem('urlToImage', $$(e.path[1]).data("urltoimage"));
+				localStorage.setItem('source', $$(e.path[1]).data("source"));
+				console.log(e);
+			},
+		},
+		on: {
+			pageInit: function () {
+				var self = this;
+				var $this = this;
+				var app = this.$app;
+				var $$ = this.$$;
+				var dataJSON = new Array();
+				app.request.get('https://newsapi.org/v2/top-headlines', {country: 'id', pageSize: 20, apiKey: myApiKey}, (response) => {
+					var items = [];
+					dataJSON = JSON.parse(response);
+					var item = dataJSON.articles;
+					for(var i = 0; i < item.length; i++) {
+						var tampil = item[i];
+						if(tampil.content != null) {
+							var content = tampil.content.replace(/['"()]/g, "");
+						}else {
+							var content = "-";	
+						}
+						if(tampil.description != null) {
+							var description = tampil.description.replace(/['"()]/g, "");
+						}else {
+							var description = "-";
+						}
+						if(tampil.title != null) {
+							var title = tampil.title.replace(/['"()]/g, "");
+						}else {
+							var title = "-";
+						}
+						items.push({
+							author: tampil.author,
+							content: content,
+							description: description,
+							publishedAt: tampil.publishedAt,
+							title: title,
+							url: tampil.url,
+							urlToImage: tampil.urlToImage,
+							source: {
+								id: tampil.source.id,
+								name: tampil.source.name
+							}
+						});
+					}
+					console.log(items);
+					self.$setState({
+						data_1: items
+					});
+				});
+			},
+		},
+	}
+</script>

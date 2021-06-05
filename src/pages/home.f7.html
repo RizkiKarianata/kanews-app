@@ -1,0 +1,573 @@
+<template>
+	<div class="page page-home">
+		<div class="toolbar tabbar toolbar-bottom" style="background: #0b88f6;">
+			<div class="toolbar-inner">
+				<a href="#tab-1" class="tab-link tab-link-active">
+					<i class="icon f7-icons if-not-md" style="color: #fff;">house_alt</i>
+					<i class="icon material-icons md-only" style="color: #fff;">home</i>
+				</a>
+				<a href="#tab-2" class="tab-link">
+					<i class="icon f7-icons if-not-md" style="color: #fff;">square_list</i>
+					<i class="icon material-icons md-only" style="color: #fff;">format_list_bulleted</i>
+				</a>
+				<a href="#tab-3" class="tab-link">
+					<i class="icon f7-icons if-not-md" style="color: #fff;">person_crop_circle</i>
+					<i class="icon material-icons md-only" style="color: #fff;">account_circle</i>
+				</a>
+			</div>
+		</div>
+		<div class="tabs">
+			<div class="page-content login-screen-content tab tab-active" id="tab-1">
+				<div class="navbar-top">
+					<div class="container">
+						<div class="row">
+							<div class="col-50">
+								<div class="content-left">
+									<h3>KNews</h3>
+								</div>
+							</div>
+							<div class="col-50">
+								<div class="content-right">
+									<a href="/search/"><i class="f7-icons">search</i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="block">
+					{{#if error1}}
+					<p>{{error1}}</p>
+					{{else}}
+					{{/if}}
+					{{#if error2}}
+					<p>{{error2}}</p>
+					{{else}}
+					{{/if}}
+					{{#if error3}}
+					<p>{{error3}}</p>
+					{{else}}
+					{{/if}}
+					{{#if error4}}
+					<p>{{error4}}</p>
+					{{else}}
+					{{/if}}
+				</div>
+				<div class="slider-home3">
+					<div class="container">
+						<div class="swiper-container dswiper_1">
+							<div class="swiper-pagination"></div>
+							<div class="swiper-wrapper">
+								{{#each data_1}}
+								<div class="swiper-slide">
+									<img src="{{this.urlToImage}}" alt="" style="height: 225px;" referrerpolicy="no-referrer">
+									<div class="mask"></div>
+									<div class="caption">
+										<span>{{this.source.name}}</span>
+										<a class="single-news" href="/single-news/" @click="singleNews" data-author="'{{this.author}}'" data-content="'{{this.content}}'" data-description="'{{this.description}}'" data-publishedat="'{{this.publishedAt}}'" data-title="'{{this.title}}'" data-url="'{{this.url}}'" data-urltoimage="'{{this.urlToImage}}'" data-source="'{{this.source.name}}'"><h4>{{this.title}}</h4></a>
+									</div>
+								</div>
+								{{/each}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="post-grid segments">
+					<div class="container">
+						<div class="row">
+							{{#each data_2}}
+							<div class="col-50">
+								<div class="content">
+									<img src="{{this.urlToImage}}" alt="" style="height: 100px;" referrerpolicy="no-referrer">
+									<div class="text">
+										<span>{{this.source.name}}</span>
+										<a class="single-news" href="/single-news/" @click="singleNews" data-author="'{{this.author}}'" data-content="'{{this.content}}'" data-description="'{{this.description}}'" data-publishedat="'{{this.publishedAt}}'" data-title="'{{this.title}}'" data-url="'{{this.url}}'" data-urltoimage="'{{this.urlToImage}}'" data-source="'{{this.source.name}}'">
+											<h5>{{this.title}}</h5>
+										</a>
+										<br>
+									</div>
+								</div>
+							</div>
+							{{/each}}
+						</div>
+						<div class="link-more">
+							<a href="/news/">Semuanya <i class="f7-icons">arrow_right</i></a>
+						</div>
+					</div>
+				</div>
+				<div class="home-category">
+					<div data-grab-cursor="false" data-space-between="10" data-slides-per-view="auto" class="swiper-container swiper-init demo-swiper demo-swiper-auto swiper-container-horizontal">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<div class="content">
+									<img src="static/image/k1.jpg" alt="">
+									<div class="text">
+										<a href="/topics-detail/business/">
+											<h5>Bisnis</h5>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="content">
+									<img src="static/image/k2.jpg" alt="">
+									<div class="text">
+										<a href="/topics-detail/sports/">
+											<h5>Olahraga</h5>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="content">
+									<img src="static/image/k3.jpg" alt="">
+									<div class="text">
+										<a href="/topics-detail/entertainment/">
+											<h5>Hiburan</h5>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="content">
+									<img src="static/image/k4.jpg" alt="">
+									<div class="text">
+										<a href="/topics-detail/technology/">
+											<h5>Teknologi</h5>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="content">
+									<img src="static/image/k5.jpg" alt="">
+									<div class="text">
+										<a href="/topics-detail/health/">
+											<h5>Kesehatan</h5>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="recent-post">
+					<div class="container">
+						<div class="section-title">
+							<h3>Berita Terbaru</h3>
+						</div>
+						<div class="wrap-content">
+							{{#each data_3}}
+							<div class="row">
+								<div class="col-100">
+									<div class="content">
+										<img src="{{this.urlToImage}}" alt="" style="height: 200px;" referrerpolicy="no-referrer">
+										<div class="content-text">
+											<span>{{this.source.name}}</span>
+											<a class="single-news" href="/single-news/" @click="singleNews" data-author="'{{this.author}}'" data-content="'{{this.content}}'" data-description="'{{this.description}}'" data-publishedat="'{{this.publishedAt}}'" data-title="'{{this.title}}'" data-url="'{{this.url}}'" data-urltoimage="'{{this.urlToImage}}'" data-source="'{{this.source.name}}'"><h4>{{this.title}}</h4></a>
+										</div>
+									</div>
+								</div>
+							</div>
+							{{/each}}
+							{{#each data_4}}
+							<div class="row">
+								<div class="col-50">
+									<div class="content">
+										<a href="/single-post/">
+											<img src="{{this.urlToImage}}" alt="" style="height: 125px;" referrerpolicy="no-referrer">
+										</a>
+									</div>
+								</div>
+								<div class="col-50">
+									<div class="content-text">
+										<span>{{this.source.name}}</span>
+										<a class="single-news" href="/single-news/" @click="singleNews" data-author="'{{this.author}}'" data-content="'{{this.content}}'" data-description="'{{this.description}}'" data-publishedat="'{{this.publishedAt}}'" data-title="'{{this.title}}'" data-url="'{{this.url}}'" data-urltoimage="'{{this.urlToImage}}'" data-source="'{{this.source.name}}'"><h5>{{this.title}}</h5></a>
+									</div>
+								</div>
+							</div>
+							{{/each}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="page-content login-screen-content tab" id="tab-2">
+				<div class="navbar navbar-page">
+					<div class="navbar-inner sliding">
+						<div class="subnavbar">
+							<div class="title-pages">
+								<h3>Kategori</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="categories segments-page">
+					<div class="container">
+						<div class="row">
+							<div class="col-50">
+								<a href="/categories-detail/olahraga/">
+									<div class="content">
+										<div class="wrap-icon">
+											<div class="border"></div>
+											<div class="icon">
+												<i class="f7-icons">gauge_badge_plus</i>
+											</div>
+										</div>
+										<h4>Olahraga</h4>
+									</div>
+								</a>
+							</div>
+							<div class="col-50">
+								<a href="/categories-detail/kendaraan/">
+									<div class="content">
+										<div class="wrap-icon">
+											<div class="border"></div>
+											<div class="icon">
+												<i class="f7-icons">car_fill</i>
+											</div>
+										</div>
+										<h4>Kendaraan</h4>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-50">
+								<a href="/categories-detail/makanan/">
+									<div class="content">
+										<div class="wrap-icon">
+											<div class="border"></div>
+											<div class="icon">
+												<i class="f7-icons">poultry_leg</i>
+											</div>
+										</div>
+										<h4>Makanan</h4>
+									</div>
+								</a>
+							</div>
+							<div class="col-50">
+								<a href="/categories-detail/pakaian/">
+									<div class="content">
+										<div class="wrap-icon">
+											<div class="border"></div>
+											<div class="icon">
+												<i class="f7-icons">tag_circle_fill</i>
+											</div>
+										</div>
+										<h4>Pakaian</h4>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-50">
+								<a href="/categories-detail/teknologi/">
+									<div class="content">
+										<div class="wrap-icon">
+											<div class="border"></div>
+											<div class="icon">
+												<i class="f7-icons">device_desktop</i>
+											</div>
+										</div>
+										<h4>Teknologi</h4>
+									</div>
+								</a>
+							</div>
+							<div class="col-50">
+								<a href="/categories-detail/petualangan/">
+									<div class="content">
+										<div class="wrap-icon">
+											<div class="border"></div>
+											<div class="icon">
+												<i class="f7-icons">airplane</i>
+											</div>
+										</div>
+										<h4>Petualangan</h4>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="page-content login-screen-content tab" id="tab-3">
+				<div class="author-page">
+					<div class="header">
+						<img src="static/image/author-header.jpg" alt="">
+						<div class="mask"></div>
+					</div>
+					<div class="wrap-content">
+						<div class="container">
+							<div class="user">
+								<img src="static/image/author-logo.jpg" alt="">
+								<div class="title">
+									<h3>Rizki Karianata</h3>
+									<span>Web Developer</span>
+								</div>
+								<div class="info">
+									<div class="row">
+										<div class="col-33">
+											<div class="content">
+												<h3>9</h3>
+												<span>Postingan</span>
+											</div>
+										</div>
+										<div class="col-33">
+											<div class="content">
+												<h3>1.098</h3>
+												<span>Pengikut</span>
+											</div>
+										</div>
+										<div class="col-33">
+											<div class="content">
+												<h3>530</h3>
+												<span>Mengikuti</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="follow">
+									<div class="row">
+										<div class="col-50">
+											<div class="content">
+												<a class="link external" href="https://www.instagram.com/rizkikarianata/" target="_system">Ikuti</a>
+											</div>
+										</div>
+										<div class="col-50">
+											<div class="content">
+												<a class="link external" href="https://wa.me/62895395333224?text=Hai, saya membutuhkan bantuan Anda." target="_system">Hubungi</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+<script>
+	export default {
+		mounted() {
+			var $this = this;
+			var app = this.$app;
+			var $$ = this.$$;
+			var self = this;
+		},
+		methods: {
+			singleNews: function(e) {
+				var $this = this;
+				var app = this.$app;
+				var $$ = this.$$;
+				var self = this;
+				localStorage.setItem('author', $$(e.path[1]).data("author"));
+				localStorage.setItem('content', $$(e.path[1]).data("content"));
+				localStorage.setItem('description', $$(e.path[1]).data("description"));
+				localStorage.setItem('publishedAt', $$(e.path[1]).data("publishedat"));
+				localStorage.setItem('title', $$(e.path[1]).data("title"));
+				localStorage.setItem('url', $$(e.path[1]).data("url"));
+				localStorage.setItem('urlToImage', $$(e.path[1]).data("urltoimage"));
+				localStorage.setItem('source', $$(e.path[1]).data("source"));
+				console.log(e);
+			},
+		},
+		on: {
+			pageInit: function () {
+				var self = this;
+				var $this = this;
+				var app = this.$app;
+				var $$ = this.$$;
+				var dataJSON = new Array();
+				app.request({
+					url: 'https://newsapi.org/v2/everything',
+					dataType: 'json',
+					contentType: "application/json",
+					method: 'GET',
+					data: {q: 'bencana', language: 'id', pageSize: 5, apiKey: myApiKey},
+					statusCode: {
+						200: function (xhr) {
+							console.log("Data berhasil diubah");
+						},
+					},
+					success: function (response, status, xhr) {
+						var items = [];
+						dataJSON = response;
+						var item = dataJSON.articles;
+						for(var i = 0; i < item.length; i++) {
+							var tampil = item[i];
+							if(tampil.content != null) {
+								var content = tampil.content.replace(/['"()]/g, "");
+							}else {
+								var content = "-";	
+							}
+							if(tampil.description != null) {
+								var description = tampil.description.replace(/['"()]/g, "");
+							}else {
+								var description = "-";
+							}
+							if(tampil.title != null) {
+								var title = tampil.title.replace(/['"()]/g, "");
+							}else {
+								var title = "-";
+							}
+							items.push({
+								author: tampil.author,
+								content: content,
+								description: description,
+								publishedAt: tampil.publishedAt,
+								title: title,
+								url: tampil.url,
+								urlToImage: tampil.urlToImage,
+								source: {
+									id: tampil.source.id,
+									name: tampil.source.name
+								}
+							});
+						}
+						console.log(items);
+						self.$setState({
+							data_1: items
+						});
+					},
+					error: function (xhr, status, error) {
+						var xhr1 = xhr;
+						var xhr2 = JSON.stringify(xhr);
+						var xhr3 = status;
+						var xhr4 = error;
+						console.log(xhr);
+						console.log(JSON.stringify(xhr));
+						console.log(status);
+						app.dialog.alert(JSON.stringify(xhr));
+						self.$setState({
+							error1: xhr1,
+							error2: xhr2,
+							error3: xhr3,
+							error4: xhr4
+						});
+					}
+				});
+				app.request.get('https://newsapi.org/v2/top-headlines', {country: 'id', category: 'business', pageSize: 4, apiKey: myApiKey}, (response) => {
+					var items = [];
+					dataJSON = JSON.parse(response);
+					var item = dataJSON.articles;
+					for(var i = 0; i < item.length; i++) {
+						var tampil = item[i];
+						if(tampil.content != null) {
+							var content = tampil.content.replace(/['"()]/g, "");
+						}else {
+							var content = "-";	
+						}
+						if(tampil.description != null) {
+							var description = tampil.description.replace(/['"()]/g, "");
+						}else {
+							var description = "-";
+						}
+						if(tampil.title != null) {
+							var title = tampil.title.replace(/['"()]/g, "");
+						}else {
+							var title = "-";
+						}
+						items.push({
+							author: tampil.author,
+							content: content,
+							description: description,
+							publishedAt: tampil.publishedAt,
+							title: title,
+							url: tampil.url,
+							urlToImage: tampil.urlToImage,
+							source: {
+								id: tampil.source.id,
+								name: tampil.source.name
+							}
+						});
+					}
+					console.log(items);
+					self.$setState({
+						data_2: items
+					});
+				});
+				app.request.get('https://newsapi.org/v2/top-headlines', {country: 'id', category: 'health', pageSize: 1, apiKey: myApiKey}, (response) => {
+					var items = [];
+					dataJSON = JSON.parse(response);
+					var item = dataJSON.articles;
+					for(var i = 0; i < item.length; i++) {
+						var tampil = item[i];
+						if(tampil.content != null) {
+							var content = tampil.content.replace(/['"()]/g, "");
+						}else {
+							var content = "-";	
+						}
+						if(tampil.description != null) {
+							var description = tampil.description.replace(/['"()]/g, "");
+						}else {
+							var description = "-";
+						}
+						if(tampil.title != null) {
+							var title = tampil.title.replace(/['"()]/g, "");
+						}else {
+							var title = "-";
+						}
+						items.push({
+							author: tampil.author,
+							content: content,
+							description: description,
+							publishedAt: tampil.publishedAt,
+							title: title,
+							url: tampil.url,
+							urlToImage: tampil.urlToImage,
+							source: {
+								id: tampil.source.id,
+								name: tampil.source.name
+							}
+						});
+					}
+					console.log(items);
+					self.$setState({
+						data_3: items
+					});
+				});
+				app.request.get('https://newsapi.org/v2/top-headlines', {country: 'id', category: 'sports', pageSize: 3, apiKey: myApiKey}, (response) => {
+					var items = [];
+					dataJSON = JSON.parse(response);
+					var item = dataJSON.articles;
+					for(var i = 0; i < item.length; i++) {
+						var tampil = item[i];
+						if(tampil.content != null) {
+							var content = tampil.content.replace(/['"()]/g, "");
+						}else {
+							var content = "-";	
+						}
+						if(tampil.description != null) {
+							var description = tampil.description.replace(/['"()]/g, "");
+						}else {
+							var description = "-";
+						}
+						if(tampil.title != null) {
+							var title = tampil.title.replace(/['"()]/g, "");
+						}else {
+							var title = "-";
+						}
+						items.push({
+							author: tampil.author,
+							content: content,
+							description: description,
+							publishedAt: tampil.publishedAt,
+							title: title,
+							url: tampil.url,
+							urlToImage: tampil.urlToImage,
+							source: {
+								id: tampil.source.id,
+								name: tampil.source.name
+							}
+						});
+					}
+					console.log(items);
+					self.$setState({
+						data_4: items
+					});
+				});
+			},
+		},
+	}
+</script>
