@@ -1,11 +1,14 @@
-# CRUD Framework7
-Aplikasi CRUD Sederhana Berbasis Mobile yang menggunakan Framework7 berguna untuk teman - teman yang baru belajar mobile menggunakan Framework7
+# KNews
+Aplikasi KNews Berbasis Mobile menggunakan Framework7 merupakan aplikasi yang berguna untuk membaca berita dalam negeri seperti berita bencana, sepak bola, dan lain sebagainya.
 
 # Usage
 * Install Node.js
-* Buka direktori Zodiak Weton di Command Prompt
-* Ketik npm start
+* Buka direktori KNews di Command Prompt
+* Ketik npm start atau npm run dev
 * Otomatis terbuka localhost:8080
+
+# App Image
+![Alt text](https://karianata.com/framework7/knews_1.png)
 
 ## Framework7 CLI Options
 
