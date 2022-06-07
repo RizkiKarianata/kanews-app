@@ -66,7 +66,7 @@ Download the latest project release from the [Release Page](https://github.com/R
 
 ## 📆 Release Date
 
-* v1.0.0 : 06 June 2022
+* v1.0.0 : 07 June 2022
 
 ## 🧑 Author
 
